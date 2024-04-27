@@ -5,6 +5,8 @@
 + 开发者只需要专注于编写文档，不需要关心文档的样式和布局。
 + 顶部的导航栏和侧边栏需要自己配置，参考已有的代码即可。
 
+项目构建后的结果：[https://yunfeidog.github.io/docs-template/](https://yunfeidog.github.io/docs-template/)
+
 ## 2.如何安装
 
 1. 使用npm安装(推荐)
