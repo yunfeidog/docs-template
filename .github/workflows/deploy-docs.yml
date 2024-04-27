@@ -47,12 +47,15 @@ jobs:
           yarn run docs:build
           > src/.vuepress/dist/.nojekyll
 
-      # 部署到 GitHub Pages
+      # 查看 workflow 的文档来获取更多信息
+      # @see https://github.com/crazy-max/ghaction-github-pages
       - name: Deploy to GitHub Pages
-        # 此actions的官方文档 https://github.com/JamesIves/github-pages-deploy-action
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: crazy-max/ghaction-github-pages@v4
         with:
-          # 要部署的文件夹，必填
-          FOLDER: src/.vuepress/dist
-          # 希望部署的分支，默认gh-pages
-          BRANCH: gh-pages
+          # 部署到 gh-pages 分支
+          target_branch: gh-pages
+          # 部署目录为 VuePress 的默认输出目录
+          build_dir: src/.vuepress/dist
+        env:
+          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
