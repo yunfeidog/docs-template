@@ -28,21 +28,6 @@ export default defineUserConfig({
         registerComponentsPlugin({
             componentsDir: path.resolve(__dirname, "./components"),
         }),
-        // 搜索插件
-        searchPlugin({
-            //多语言支持
-            locales: {
-                "/": {
-                    placeholder: "搜索本站",
-                },
-            },
-            // 热键支持
-            hotKeys: ["command", "k"],
-            // 最大推荐个数
-            maxSuggestions: 7,
-            // 排除首页
-            isSearchable: (page) => page.path !== "/",
-        }),
     ],
 
     shouldPrefetch: false,
