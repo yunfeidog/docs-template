@@ -12,34 +12,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # 1. 拉取代码
+      - name: 拉取代码
+        uses: actions/checkout@v3
         with:
-          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
           fetch-depth: 0
+          # 如果你文档需要 Git 子模块，取消注释下一行
+          # submodules: true
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+
+        # 2. 安装依赖并构建文档
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
         with:
-          # 选择要使用的 pnpm 版本
-          version: 8
-          # 使用 pnpm 安装依赖
-          run_install: true
+          node-version: 18
+          cache: yarn
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          # 选择要使用的 node 版本
-          node-version: 20
-          # 缓存 pnpm 依赖
-          cache: pnpm
 
-      # 运行构建脚本
-      - name: Build VuePress site
-        run: pnpm docs:build
+      - name: 安装依赖
+        run: yarn install --frozen-lockfile # 这里是安装依赖，如果你的文档构建失败，可以尝试删除 --frozen-lockfile
+
+      - name: 构建文档
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192 # 这里是设置内存，如果你的文档构建失败，可以尝试增大内存
+        run: |-
+          yarn run docs:build
+          > src/.vuepress/dist/.nojekyll
 
       # 查看 workflow 的文档来获取更多信息
       # @see https://github.com/crazy-max/ghaction-github-pages
-      - name: Deploy to GitHub Pages
+      - name: 部署 GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
         with:
           # 部署到 gh-pages 分支
