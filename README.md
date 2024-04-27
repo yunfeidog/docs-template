@@ -23,7 +23,7 @@ pnpm run docs:dev
 
 3. 配置说明
 文档的自动部署GitHub Page 需要填写以下信息到GitHub 
-+ GITHUB_TOKEN
++ TOKEN变量
 
 | 任务              | 状态 |
 |-----------------|----|
