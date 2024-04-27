@@ -29,32 +29,23 @@ jobs:
           # "最近更新时间"等 git 日志相关信息，需要拉取全部提交记录
           fetch-depth: 0
 
-      # 安装 Node 环境
-      - name: Setup Node.js
+        # 2. 安装依赖并构建文档
+      - name: 设置 Node.js
         uses: actions/setup-node@v3
         with:
-          # 选择要使用的 node 版本
-          node-version: 16
+          node-version: 18
+          cache: yarn
 
-      # 如果你的依赖是使用npm的，用这种
-      # 缓存 npm node_modules
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-cache-
 
-      # 安装依赖 npm
-      - name: Install dependencies
-        # 如果没有命中缓存才执行 npm install
-        if: steps.cache-deps.outputs.cache-hit != 'true'
-        run: npm install
+      - name: 安装依赖
+        run: yarn install --frozen-lockfile # 这里是安装依赖，如果你的文档构建失败，可以尝试删除 --frozen-lockfile
 
-      # 运行构建脚本
-      - name: Run Build Script
-        run: npm run docs:build
+      - name: 构建文档
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192 # 这里是设置内存，如果你的文档构建失败，可以尝试增大内存
+        run: |-
+          yarn run docs:build
+          > src/.vuepress/dist/.nojekyll
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
