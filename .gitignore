@@ -6,7 +6,6 @@ src/.vuepress/.cache/
 src/.vuepress/.temp/
 src/.vuepress/dist/
 .fastRequest
-package-lock.json
 # local env files
 .env.local
 .env.*.local
