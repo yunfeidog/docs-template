@@ -1,53 +1,67 @@
-name: docs
+# 工作流的名称，如果省略，则使用当前文件名
+name: Auto Deploy
 
+# 从工作流生成的工作流运行的名称，如果省略，则使用提交时的commit信息
+run-name: Deploy by @${{ github.actor }}
+
+# 触发部署的条件
 on:
-  # 每当 push 到 main 分支时触发部署
+  # 每当 push 到 master 分支时触发部署
   push:
-    branches: [main]
-  # 手动触发部署
-  workflow_dispatch:
+    branches:
+      - master
 
+# 当前流程要执行的任务，可以是多个。[my_first_job]就是一个任务
 jobs:
-  docs:
+  my_first_job:
+    # 任务的名称，不设置则默认my_first_job
+    name: build-and-deploy
+
+    # 运行所需要的虚拟机环境
     runs-on: ubuntu-latest
 
+    # 每个任务下的运行步骤，短横杠 - 表示一个步骤，从上至下依次执行。
     steps:
-      # 1. 拉取代码
-      - name: 拉取代码
+      # clone 该仓库的源码到工作流中
+      - name: Clone Code
         uses: actions/checkout@v3
         with:
+          # "最近更新时间"等 git 日志相关信息，需要拉取全部提交记录
           fetch-depth: 0
-          # 如果你文档需要 Git 子模块，取消注释下一行
-          # submodules: true
 
-
-        # 2. 安装依赖并构建文档
-      - name: 设置 Node.js
+      # 安装 Node 环境
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
-          cache: yarn
+          # 选择要使用的 node 版本
+          node-version: 16
 
-
-      - name: 安装依赖
-        run: yarn install --frozen-lockfile # 这里是安装依赖，如果你的文档构建失败，可以尝试删除 --frozen-lockfile
-
-      - name: 构建文档
-        env:
-          NODE_OPTIONS: --max_old_space_size=8192 # 这里是设置内存，如果你的文档构建失败，可以尝试增大内存
-        run: |-
-          yarn run docs:build
-          > src/.vuepress/dist/.nojekyll
-
-      # 查看 workflow 的文档来获取更多信息
-      # @see https://github.com/crazy-max/ghaction-github-pages
-      - name: 部署 GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v4
+      # 如果你的依赖是使用npm的，用这种
+      # 缓存 npm node_modules
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          # 部署到 gh-pages 分支
-          target_branch: gh-pages
-          # 部署目录为 VuePress 的默认输出目录
-          build_dir: src/.vuepress/dist
-        env:
-          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-cache-
+
+      # 安装依赖 npm
+      - name: Install dependencies
+        # 如果没有命中缓存才执行 npm install
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: npm install
+
+      # 运行构建脚本
+      - name: Run Build Script
+        run: npm run docs:build
+
+      # 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        # 此actions的官方文档 https://github.com/JamesIves/github-pages-deploy-action
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          # 要部署的文件夹，必填
+          FOLDER: docs/.vuepress/dist
+          # 希望部署的分支，默认gh-pages
+          BRANCH: gh-pages
