@@ -53,6 +53,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           # 要部署的文件夹，必填
-          FOLDER: docs/.vuepress/dist
+          FOLDER: src/.vuepress/dist
           # 希望部署的分支，默认gh-pages
           BRANCH: gh-pages
