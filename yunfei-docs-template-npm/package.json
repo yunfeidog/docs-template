@@ -1,0 +1,32 @@
+{
+  "name": "yunfei-docs-template-npm",
+  "version": "1.0.0",
+  "description": "this project used to download vuepress docs template ",
+  "main": "index.js",
+  "type": "module",
+  "bin": "/bin/index.cjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "yunfei-docs-template-npm create app"
+  },
+  "keywords": [
+    "vuepress",
+    "docs",
+    "template"
+  ],
+  "author": "yunfei",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "commander": "^12.0.0",
+    "figlet": "^1.7.0",
+    "fs-extra": "^11.2.0",
+    "git-clone": "^0.2.0",
+    "inquirer": "^8.2.6",
+    "ora": "^5.0.0"
+  }
+}

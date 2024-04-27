@@ -1,9 +1,17 @@
 {
-  "name": "vuepress-theme-hope-template",
-  "version": "2.0.0",
+  "name": "vuepress-theme-hope-docs-template",
+  "version": "1.0.0",
+  "author": "yunfeidog",
   "description": "A project of vuepress-theme-hope",
+  "keywords": ["vuepress", "docs", "blog", "vuepress-theme-hope"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yunfeidog/docs-template"
+  },
+
   "license": "MIT",
   "type": "module",
+  "homepage": "https://yunfeidog.github.io/docs-template/",
   "scripts": {
     "docs:build": "vuepress build src",
     "docs:clean-dev": "vuepress dev src --clean-cache",
