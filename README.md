@@ -27,6 +27,8 @@ yunfei-docs-template-npm create app
 git clone git@github.com:yunfeidog/docs-template.git
 ```
 
+然后删除 `yunfei-docs-template-npm`文件夹
+
 ## 3.如何运行
 
 安装依赖：
@@ -41,13 +43,15 @@ npm i vuepress-theme-hope-docs-template
 pnpm run docs:dev
 ```
 
-## todo
 
 ## 4.配置说明
 
 文档的自动部署GitHub Page 需要填写以下信息到GitHub
 
-+ TOKEN变量
++ 需要设置 TOKEN 变量用来部署博客
+
+## todo
+
 
 | 任务              | 状态 |
 |-----------------|----|

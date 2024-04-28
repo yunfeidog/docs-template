@@ -61,11 +61,38 @@ features:
 
 
 
-🛠 快速安装本文档构建工具
+## 如何安装
+
+1. 使用npm安装(推荐)
+
 ```shell
-pnpm install 
+pnpm install yunfei-docs-template-npm -g
+````
+
+然后在项目根目录执行以下命令(app是项目名称，可以自定义)
+
+```shell
+yunfei-docs-template-npm create app
 ```
 
-使用说明：
-+ 顶部导航栏在`navbar.ts`文件中进行配置
-+ 侧边栏在`sidebar.ts`文件中进行配置
+2. 使用git安装
+
+```shell
+git clone git@github.com:yunfeidog/docs-template.git
+```
+
+然后删除 `yunfei-docs-template-npm`文件夹
+
+## 如何运行
+
+安装依赖：
+
+```shell
+npm i vuepress-theme-hope-docs-template
+```
+
+运行：
+
+```shell
+pnpm run docs:dev
+```
