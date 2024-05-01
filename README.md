@@ -12,7 +12,7 @@
 1. 使用npm安装(推荐)
 
 ```shell
-pnpm install yunfei-docs-template-npm -g
+npm install yunfei-docs-template-npm -g
 ````
 
 然后在项目根目录执行以下命令(app是项目名称，可以自定义)
@@ -34,7 +34,7 @@ git clone git@github.com:yunfeidog/docs-template.git
 安装依赖：
 
 ```shell
-npm i vuepress-theme-hope-docs-template
+pnpm install
 ```
 
 运行：
@@ -43,21 +43,17 @@ npm i vuepress-theme-hope-docs-template
 pnpm run docs:dev
 ```
 
-
 ## 4.配置说明
 
-文档的自动部署GitHub Page 需要填写以下信息到GitHub
-
-+ 需要设置 TOKEN 变量用来部署博客
++ 网站的信息只需要在`src/.vuepress/custom.ts`文件中修改即可
 
 ## todo
-
 
 | 任务              | 状态 |
 |-----------------|----|
 | 自动部署Github Page | ✅  |
 | 发布到npm仓库        | ✅  |
 | 终端配置用户信息        | ❌  |
-| 搜索插件            | ❌  |
+| 搜索插件            | ✅  |
 
 

@@ -1,7 +1,7 @@
 ---
 home: true
-layout: Blog
-hero: true
+layout: BlogHome
+hero: false
 bgImage: /blog_background.jpg
 heroFullScreen: true
 projects:
