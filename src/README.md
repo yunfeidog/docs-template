@@ -5,6 +5,10 @@ title: 个人主页
 heroImage: /logo.png
 heroText: VuePress文档快速构建
 tagline: ✨在这里填写副标题✨
+bgImage: https://theme-hope-assets.vuejs.press/bg/6-light.svg
+bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
+bgImageStyle:
+  background-attachment: fixed
 actions:
   - text: 【博客主页】
     link: /blog/
@@ -15,84 +19,38 @@ actions:
     link: /autodir/
   - text: 【vue自定义组件】
     link: /vuecomponent/
-features:
-  - title: Github
-    icon: /iconfont/github.svg
-    details: iKunのGithub
-    link: https://www.github.com/yunfeidog
-    
-  - title: CSDN
-    icon: /iconfont/csdn.svg
-    details: iKunのCSDN
-    link: https://blog.csdn.net/m0_74085417?type=blog
-    
-  - title: 力扣
-    icon: /iconfont/leetcode.svg
-    details: iKunの力扣
-    link: https://leetcode.cn/u/yunfeidog/
-    
-  - title: Codeforces
-    icon: /iconfont/codeforces.svg
-    details: iKunのCodeforces
-    link: https://codeforces.com/profile/Houyunfei
-    
 
-  - title: 洛谷
-    icon: /iconfont/luogu.svg
-    details: iKunの洛谷
-    link: https://www.luogu.com.cn/user/749836
-    
-  - title: Linux.do
-    icon: /iconfont/linux.svg
-    details: iKunのLinux.do
-    link: https://www.linux.do
+highlights:
+  - header: 易于安装
+    image: /assets/image/box.svg
+    bgImage: https://theme-hope-assets.vuejs.press/bg/3-light.svg
+    bgImageDark: https://theme-hope-assets.vuejs.press/bg/3-dark.svg
+    highlights:
+      - title: 运行 <code>npm install yunfei-docs-template-npm -g</code> 以下载项目脚手架。
+      - title: 再运行 <code>yunfei-docs-template-npm create app</code> 创建出项目app。
 
-  - title: Vuepress
-    icon: /iconfont/vuepress.svg
-    details: Vuepress官网
-    link: https://vuepress.vuejs.org/zh/
+  - header: 简单的配置
+    description: 我们扩展了标准的 CommonMark 规范，为你添加了成吨功能。
+    image: /assets/image/markdown.svg
+    bgImage: https://theme-hope-assets.vuejs.press/bg/2-light.svg
+    bgImageDark: https://theme-hope-assets.vuejs.press/bg/2-dark.svg
+    bgImageStyle:
+      background-repeat: repeat
+      background-size: initial
+    features:
+      - title: Github
+        icon: /iconfont/github.svg
+        details: Github
+        link: https://www.github.com
 
-  - title: hope主题
-    icon: /iconfont/vuepress.svg
-    details: Vuepress-theme-hope
-    link: https://theme-hope.vuejs.press/zh/
+
+      - title: Vuepress
+        icon: /iconfont/vuepress.svg
+        details: Vuepress官网
+        link: https://vuepress.vuejs.org/zh/
+
+      - title: hope主题
+        icon: /iconfont/vuepress.svg
+        details: Vuepress-theme-hope
+        link: https://theme-hope.vuejs.press/zh/
 ---
-
-
-
-
-## 如何安装
-
-1. 使用npm安装(推荐)
-
-```shell
-pnpm install yunfei-docs-template-npm -g
-````
-
-然后在项目根目录执行以下命令(app是项目名称，可以自定义)
-
-```shell
-yunfei-docs-template-npm create app
-```
-
-2. 使用git安装
-
-```shell
-git clone git@github.com:yunfeidog/docs-template.git
-```
-
-然后删除 `yunfei-docs-template-npm`文件夹
-
-## 如何运行
-
-安装依赖：
-
-```shell
-npm i vuepress-theme-hope-docs-template
-```
-
-运行：
-
-```shell
-pnpm run docs:dev
-```
