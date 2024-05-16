@@ -45,7 +45,12 @@ pnpm run docs:dev
 
 ## 4.配置说明
 
-+ 网站的信息只需要在`src/.vuepress/custom.ts`文件中修改即可
++ 网站的信息只需要在`src/.vuepress/custom.ts`文件中修改即可，一些配置一定要修改为自己的。
+
+如果你想要把改项目作为一个项目的文档，只需要放在根目录下面，然后使用`.github/workflows/deploy-docs2.yml.bak`
+中的配置，在这个配置文件中修改`WORK_DIR: docs-template #todo: 修改为你的项目文档目录`
+
+同时需要删除`.github/workflows/deploy-docs.yml`文件
 
 ## todo
 
@@ -55,5 +60,6 @@ pnpm run docs:dev
 | 发布到npm仓库        | ✅  |
 | 终端配置用户信息        | ❌  |
 | 搜索插件            | ✅  |
+| 支持直接放在docs目录下   | ✅  |
 
 

@@ -1,0 +1,62 @@
+
+name: Deploy Docs
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  WORK_DIR: docs-template #todo: 修改为你的项目文档目录
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-gh-pages:
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+            working-directory: ${{ env.WORK_DIR }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          # if your docs needs submodules, uncomment the following line
+          # submodules: true
+      - name: 列出当前目录
+        run: |
+          ls -al
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: ${{ env.WORK_DIR }}/pnpm-lock.yaml
+
+      - name: Install Deps
+        run: |
+          corepack enable
+          pnpm install --no-frozen-lockfile
+
+      - name: Build Docs
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: |-
+          pnpm run docs:build
+          > src/.vuepress/dist/.nojekyll
+
+      - name: Deploy Docs
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          # Deploy Docs
+          branch: gh-pages
+          folder: ${{env.WORK_DIR}}/src/.vuepress/dist
